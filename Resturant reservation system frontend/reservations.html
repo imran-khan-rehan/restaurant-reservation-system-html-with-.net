@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Table</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+          const user = JSON.parse(sessionStorage.getItem('user'));
+          if (!user || user.data.role != 'User') {
+            window.location.href = 'login.html';
+          }
+        }
+        // Run check immediately
+        checkAuth();
+        function logout() {
+            sessionStorage.removeItem('user');
+        }
+      </script>
+  <div class="wrapper">
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h2>RMS</h2>
+          <button class="close-btn" onclick="toggleSidebar()">✕</button>
+        </div>
+        <ul>
+          <li><a href="home.html"><i class="icon-restaurant"></i> Home</a></li>
+          <li class="selected"><a href="reservations.html"><i class="icon-reservation"></i> Book Table</a></li>
+          <li onclick="logout()"><a href="login.html"><i class="icon-reservation"></i> Logout</a></li>
+       
+        </ul>
+      </div>
+    <div class="content">
+      <header>
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <h1>Restaurant Management System</h1>
+      </header>
+        <main>
+          <button class="btn-add" onclick="showBookingPopup()">Book Table</button>
+          <table id="booked-tables">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Table Name</th>
+                <th>Date</th>
+                <th>Customer Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </main>
+      
+        <div class="popup-container" id="booking-popup">
+            <div class="popup-box">
+              <button class="popup-close" onclick="closeBookingPopup()">&times;</button>
+              <h2 id="popup-title">Book Table</h2>
+              <form id="booking-form">
+                <label for="booking-date">Select Date:</label>
+                <input type="date" id="booking-date" required />
+                <button id="showtable" type="button" onclick="showAvailableTables()">Show Tables</button>
+                <div id="available-tables" class="available-tables">
+                </div>
+                <label for="customer-name">Customer Name:</label>
+                <input type="text" id="customer-name" placeholder="Customer Name" required />
+                <div class="popup-buttons">
+                  <button type="button" onclick="closeBookingPopup()">Cancel</button>
+                  <button type="submit">Save Booking</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+      </div>
+      
+  </div>
+</body>
+<script src="js/config.js"></script>
+
+<script src="js/reservations.js"></script>
+<script src="js/script.js"></script>
+</html>

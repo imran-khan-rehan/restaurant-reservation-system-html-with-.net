@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Restaurant</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script>
+    // Check if user is logged in
+    function checkAuth() {
+      const user = JSON.parse(sessionStorage.getItem('user'));
+      if (!user) {
+        window.location.href = 'login.html';
+      }
+      else if(user.data.role == 'User'){
+        window.location.href = 'reservations.html';
+      }
+      else if(user.data.role != 'Admin'){
+        window.location.href = 'login.html';
+      }
+    }
+    // Run check immediately
+    checkAuth();
+    function logout() {
+        sessionStorage.removeItem('user');
+    }
+  </script>
+  <div class="wrapper">
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h2>RMS</h2>
+          <button class="close-btn" onclick="toggleSidebar()">✕</button>
+        </div>
+        <ul>
+          <li><a href="index.html"><i class="icon-restaurant"></i> Home</a></li>
+          <li class="selected"><a href="manage-restaurant.html"><i class="icon-restaurant"></i> Manage Restaurant</a></li>
+          <li><a href="manage-tables.html"><i class="icon-tables"></i> Manage Tables</a></li>
+          <li><a href="book-table.html"><i class="icon-reservation"></i> Book Table</a></li>
+          <li onclick="logout()"><a href="login.html"><i class="icon-reservation"></i> Logout</a></li>
+
+        </ul>
+      </div>
+
+    <div class="content">
+        <header>
+            <button class="hamburger" onclick="toggleSidebar()">☰</button>
+            <h1>Restaurant Management System</h1>
+          </header>
+      <main>
+        <button class="btn-add" onclick="showPopup()">Add Restaurant</button>
+        <table id="restaurant-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </main>
+    </div>
+
+    <div class="popup-container" id="popup">
+        <div class="popup-box">
+          <button class="popup-close" onclick="closePopup()">&times;</button>
+          <h2 id="popup-title">Add Restaurant</h2>
+          <form id="restaurant-form">
+            <input type="hidden" id="restaurant-id" />
+            <label for="restaurant-name">Name:</label>
+            <input type="text" id="restaurant-name" placeholder="Restaurant Name" required />
+            <label for="restaurant-location">Location:</label>
+            <input type="text" id="restaurant-location" placeholder="Restaurant Location" required />
+            <div class="popup-buttons">
+              <button type="button" onclick="closePopup()">Cancel</button>
+              <button type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+  </div>
+  <script  src="js/script.js"></script>
+<script src="js/config.js"></script>
+  <script src="js/manage-restaurant.js"></script>
+</body>
+</html>

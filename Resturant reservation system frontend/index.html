@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script>
+    // Check if user is logged in
+    function checkAuth() {
+      const user = JSON.parse(sessionStorage.getItem('user'));
+      if (!user) {
+        window.location.href = 'login.html';
+      }
+      else if(user.data.role == 'User'){
+        window.location.href = 'reservations.html';
+      }
+      else if(user.data.role != 'Admin'){
+        window.location.href = 'login.html';
+      }
+    }
+    // Run check immediately
+    checkAuth();
+    function logout() {
+        sessionStorage.removeItem('user');
+    }
+  </script>
+  <div class="wrapper">
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>RMS</h2>
+        <button class="close-btn" onclick="toggleSidebar()">✕</button>
+      </div>
+      <ul>
+        <li class="selected"><a href="index.html"><i class="icon-restaurant"></i> Home</a></li>
+        <li ><a href="manage-restaurant.html"><i class="icon-restaurant"></i> Manage Restaurant</a></li>
+        <li><a href="manage-tables.html"><i class="icon-tables"></i> Manage Tables</a></li>
+        <li><a href="book-table.html"><i class="icon-reservation"></i> Book Table</a></li>
+        <li onclick="logout()"><a href="login.html"><i class="icon-reservation"></i> Logout</a></li>
+
+      </ul>
+    </div>
+
+    <div class="content">
+      <header>
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <h1>Restaurant Management System</h1>
+      </header>
+      <main>
+        <div class="hero">
+          <h2>Welcome to RMS</h2>
+          <p>Efficiently manage your restaurant, tables, and reservations.</p>
+        </div>
+
+        <section class="features">
+          <div class="card">
+            <h3>Manage Restaurants</h3>
+            <p>Organize and track your restaurant's operations seamlessly.</p>
+            <a href="manage-restaurant.html" class="btn">Learn More</a>
+          </div>
+          <div class="card">
+            <h3>Manage Tables</h3>
+            <p>Handle table assignments and optimize seating arrangements.</p>
+            <a href="manage-tables.html" class="btn">Learn More</a>
+          </div>
+          <div class="card">
+            <h3>Book Reservations</h3>
+            <p>Streamline table bookings and improve customer satisfaction.</p>
+            <a href="book-table.html" class="btn">Learn More</a>
+          </div>
+        </section>
+
+        <section class="stats">
+          <div class="stat-item">
+            <h3>120+</h3>
+            <p>Restaurants Managed</p>
+          </div>
+          <div class="stat-item">
+            <h3>3000+</h3>
+            <p>Reservations Made</p>
+          </div>
+          <div class="stat-item">
+            <h3>500+</h3>
+            <p>Happy Customers</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
