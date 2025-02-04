@@ -1,20 +1,18 @@
-// auth.js
-document.addEventListener('DOMContentLoaded', function () {
-    // checkAuthStatus();
 
-    // Handle logout
+document.addEventListener('DOMContentLoaded', function () {
+
+
+
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', logout);
     }
 
-    // Handle login form
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', handleLogin);
     }
 
-    // Handle signup form
     const signupForm = document.getElementById('signupForm');
     if (signupForm) {
         signupForm.addEventListener('submit', handleSignup);
@@ -26,19 +24,16 @@ function checkAuthStatus() {
     const logoutBtn = document.getElementById('logoutBtn');
     console.log("user from session", user);
     if (user) {
-        // Show logout button
+
         if (logoutBtn) logoutBtn.style.display = 'inline';
 
-        // Redirect if on login/signup page
         if (window.location.pathname.includes('login.html') ||
             window.location.pathname.includes('signup.html')) {
             redirectBasedOnRole(user.role);
         }
     } else {
-        // Hide logout button
         if (logoutBtn) logoutBtn.style.display = 'none';
 
-        // Redirect to login if trying to access protected pages
         if (window.location.pathname.includes('admin') ||
             window.location.pathname.includes('user')) {
             window.location.href = 'login.html';
@@ -63,7 +58,7 @@ async function handleLogin(e) {
         const data = await response.json();
         alert(data.message);
         if (response.ok) {
-            // Store user data in session
+
             sessionStorage.setItem('user', JSON.stringify({
                 data
             }));
@@ -104,7 +99,6 @@ async function handleSignup(e) {
 }
 
 function logout() {
-    // sessionStorage.removeItem('user');
     window.location.href = 'index.html';
 }
 
