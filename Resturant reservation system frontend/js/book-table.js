@@ -10,7 +10,7 @@ let editingBookingId = null;
 
 async function fetchUsers() {
   try {
-    const response = await fetch(API_BASE_URL + '/auth'); // Adjust the endpoint as per your API
+    const response = await fetch(API_BASE_URL + '/auth'); 
     if (!response.ok) throw new Error('Failed to fetch users');
     return await response.json();
   } catch (error) {
@@ -30,7 +30,7 @@ async function populateUserDropdown() {
     {
     const option = document.createElement('option');
     option.value = user.id;
-    option.textContent = user.email; // Adjust according to user data structure
+    option.textContent = user.email; 
     userSelect.appendChild(option);
     }
   });
@@ -69,7 +69,7 @@ async function displayBookedTables() {
 
 function showBookingPopup(edit = false) {
   bookingPopup.style.display = 'flex';
-  populateUserDropdown(); // Load users
+  populateUserDropdown(); 
 
   if (!edit) {
     bookingForm.reset();
