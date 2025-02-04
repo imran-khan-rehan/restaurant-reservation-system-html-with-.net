@@ -1,7 +1,6 @@
 const popup = document.getElementById('popup');
 const restaurantForm = document.getElementById('restaurant-form');
 const restaurantTableBody = document.getElementById('restaurant-table').querySelector('tbody');
-// import { backendUrl } from "./config.js";
 const apiUrl = Config.API_URL + '/Restaurants';
 
 let isEditing = false;
