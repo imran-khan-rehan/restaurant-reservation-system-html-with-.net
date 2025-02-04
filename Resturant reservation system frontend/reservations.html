@@ -8,14 +8,12 @@
 </head>
 <body>
     <script>
-        // Check if user is logged in
         function checkAuth() {
           const user = JSON.parse(sessionStorage.getItem('user'));
           if (!user || user.data.role != 'User') {
             window.location.href = 'login.html';
           }
         }
-        // Run check immediately
         checkAuth();
         function logout() {
             sessionStorage.removeItem('user');
